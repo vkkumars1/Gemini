@@ -58,6 +58,12 @@ const Main = () => {
         setTypedData(data); // Show the data immediately
     };
 
+    const handleInputKeyDown = (e) => {
+        if (e.key === 'Enter' && input.trim() !== '') {
+            onSent();
+        }
+    };
+
     return (
         <div className="main">
             <div className="nav">
@@ -114,7 +120,13 @@ const Main = () => {
                 )}
                 <div className="main-bottom">
                     <div className="search-box">
-                        <input onChange={(e) => setInput(e.target.value)} value={input} type="text" placeholder="Enter a prompt here..." />
+                        <input
+                            onChange={(e) => setInput(e.target.value)}
+                            onKeyDown={handleInputKeyDown}
+                            value={input}
+                            type="text"
+                            placeholder="Enter a prompt here..."
+                        />
                         <div>
                             {
                                 input ? <img onClick={() => onSent()} src={assets.send_icon} alt="" /> : <>
