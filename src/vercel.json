@@ -1,5 +1,16 @@
 {
     "rewrites": [
-      { "source": "/(.*)", "destination": "/" }
+        { "source": "/(.*)", "destination": "/" }
+      ],
+    "routes": [
+        {
+            "src": "/",
+            "dest": "/"
+        },
+        {
+            "src": "/auth/sign-in",
+            "dest": "/"
+        }
+        
     ]
-  }
+}
