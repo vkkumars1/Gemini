@@ -1,0 +1,299 @@
+@keyframes loader {
+    0% {
+        background-position: 0% 0%;
+    }
+    50% {
+        background-position: 100% 0%;
+    }
+    100% {
+        background-position: 0% 0%;
+    }
+}
+
+.main {
+    flex: 1;
+    min-height: 100vh;
+    padding-bottom: 15vh;
+    position: relative;
+}
+
+.main .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 22px;
+    padding: 20px;
+    color: #585858;
+    
+}
+
+.main .nav>img {
+    width: 40px;
+    border-radius: 50%;
+}
+
+.main-container {
+    max-width: 900px;
+    margin: auto;
+    padding: 0 15px; /* Add padding for small screens */
+}
+
+.main .greet {
+    margin: 50px 0px;
+    font-size: 56px;
+    color: #c4c7c5;
+    font-weight: 500;
+    padding: 20px;
+    text-align: center;
+   
+}
+
+.main .greet span {
+    background: -webkit-linear-gradient(346deg, #4b90ff, #ff5546);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    animation: fadeIn 1.5s;
+}
+
+.main .cards {
+    display: flex;
+    gap: 15px;
+    padding: 20px;
+    flex-wrap: wrap; /* Ensure cards wrap on smaller screens */
+    justify-content: center; /* Center cards on smaller screens */
+}
+
+.main .card {
+    
+    height: auto;
+    padding: 15px;
+    background-color: #f0f4f9;
+    border-radius: 10px;
+    position: relative;
+    cursor: pointer;
+    flex: 1 1 calc(50% - 30px); /* Make cards responsive */
+    max-width: calc(50% - 30px);
+    margin: 10px; /* Add margin for spacing between cards */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.main .card img {
+    width: 35px;
+    padding: 5px;
+    position: absolute;
+    background-color: white;
+    border-radius: 20px;
+    bottom: 10px;
+    right: 10px;
+}
+
+.main .card p {
+    color: #585858;
+    font-size: 18px;
+}
+
+.main .card:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    background-color: #dfe4ea;
+}
+
+.main-bottom {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    max-width: 900px;
+    padding: 0px 20px;
+    margin: auto;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    background-color: #f0f4f9;
+    padding: 10px 20px;
+    border-radius: 50px;
+}
+
+.search-box img {
+    width: 24px;
+    cursor: pointer;
+    animation: fadeIn 1.5s;
+}
+
+.search-box input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: 8px;
+    font-size: 18px;
+}
+
+.search-box div {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    animation: fadeIn 1.5s;
+}
+
+.main .bottom-info {
+    font-size: 13px;
+    margin: 15px auto;
+    text-align: center;
+    font-weight: 300;
+    animation: highlight 1.5s infinite; /* Add highlight animation */
+}
+
+.result {
+    padding: 0px 5%;
+    max-height: 70vh;
+    overflow-y: scroll;
+}
+
+.result::-webkit-scrollbar {
+    width: 8px;
+}
+
+.result::-webkit-scrollbar-track {
+    background: #f0f4f8;
+    border-radius: 10px;
+}
+
+.result::-webkit-scrollbar-thumb {
+    background-color: #9ed7ff;
+    border-radius: 10px;
+    border: 2px solid #f0f4f8;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.result::-webkit-scrollbar-thumb:hover {
+    background-color: #6fbaff;
+    border-color: #e0e7eb;
+}
+
+.result::-webkit-scrollbar-thumb:active {
+    background-color: #4da6ff;
+    border-color: #d0d7db;
+}
+
+.result-title {
+    display: flex;
+    align-items: center;
+    margin: 40px 0px;
+    gap: 20px;
+}
+
+.result-title img {
+    width: 40px;
+    border-radius: 50%;
+    transition: transform 0.3s ease-out; /* Smooth scale transition on hover */
+}
+
+.result-title img:hover {
+    transform: scale(1.1); /* Scale up on hover */
+}
+
+.result-data {
+    display: flex;
+    align-items: flex-start; /* Align items to the top */
+    gap: 20px;
+    position: relative; /* Ensure relative positioning */
+    animation: fadeIn 1.5s;
+}
+
+.gemini-icon {
+    position: sticky;
+    top: 10px; /* Adjust as needed */
+}
+
+.result-data img {
+    width: 40px;
+    height: 40px; /* Set height to maintain aspect ratio */
+    border-radius: 50%;
+    transition: transform 0.3s ease-out; /* Smooth scale transition on hover */
+}
+
+.result-data img:hover {
+    transform: scale(1.1); /* Scale up on hover */
+}
+
+.loader {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Full viewport height for centering */
+}
+
+.loader hr {
+    width: 80%; /* Adjust width for a nicer appearance */
+    border-radius: 4px;
+    border: none;
+    height: 20px;
+    background: linear-gradient(to right, #9ed7ff, #ffffff, #9ed7ff);
+    background-size: 200% 100%; /* Adjust background size for smoother transition */
+    animation: loader 1.5s infinite linear; /* Speed up animation for more dynamism */
+    transition: transform 0.3s ease-in-out; /* Smooth transition for transform */
+}
+
+.typed-text {
+    font-family: 'Courier New', Courier, monospace; /* Typewriter-like font */
+    white-space: pre-wrap; /* Preserve whitespace */
+    overflow-wrap: break-word; /* Wrap long words */
+}
+
+@media (max-width: 636px) {
+    .main .card {
+        flex: 1 1 calc(100% - 20px); /* Full width for smaller screens */
+        max-width: calc(100% - 20px);
+        margin: 10px auto; /* Center cards */
+    }
+
+    .main .cards .card:nth-child(n+3) {
+        display: none; /* Hide the last two cards */
+    }
+
+    .main .greet {
+        font-size: 36px;
+        padding: 10px;
+    }
+
+    .search-box {
+        padding: 5px 10px;
+    }
+
+    .search-box input {
+        flex: none;
+        width: 150px;
+    }
+
+    .search-box img {
+        width: 20px;
+    }
+
+    .result {
+        padding: 0px 2%;
+    }
+
+    .result-title {
+        margin: 20px 0px;
+    }
+
+    .result-data {
+        gap: 10px;
+    }
+}
+
+@keyframes highlight {
+    0% { color: #000; }
+    50% { color: #ff5555; }
+    100% { color: #000; }
+}
+
+

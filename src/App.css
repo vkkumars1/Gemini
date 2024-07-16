@@ -1,0 +1,40 @@
+/* App.css */
+.loading {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #4b90ff, #ff5546);
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+    flex-direction: column;
+  }
+  
+  .loader-text {
+    font-size: 2em;
+    margin-bottom: 20px;
+    animation: fadeIn 1.5s ease-in-out infinite;
+  }
+  
+  @keyframes fadeIn {
+    0%, 100% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .loader-text {
+      font-size: 1.5em;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .loader-text {
+      font-size: 1em;
+    }
+  }
+  

@@ -1,0 +1,157 @@
+.sidebar {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #f0f4f9;
+  padding: 25px;
+  transition: width 0.3s ease-in-out;
+  width: 99px;
+  overflow: hidden;
+  position: relative; /* Added for positioning the drawer */
+}
+
+.sidebar.extended {
+  width: 270px;
+}
+
+.sidebar img {
+  width: 20px;
+}
+
+.sidebar .menu {
+  display: block;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.sidebar .new-chat {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 15px;
+  background-color: #e6eaf1;
+  border-radius: 50px;
+  font-size: 14px;
+  color: gray;
+  cursor: pointer;
+}
+
+.sidebar .recent {
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+  transition: opacity 0.3s ease-in-out;
+  opacity: 0;
+  max-height: 566px;
+  overflow-y: hidden;
+}
+
+.sidebar.extended .recent {
+  opacity: 1;
+  overflow-y: auto;
+}
+
+.sidebar .recent-title {
+  margin-bottom: 20px;
+  font-weight: bold;
+  color: #333;
+}
+
+.sidebar .recent-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sidebar .recent-entry {
+  display: flex;
+  align-items: start;
+  gap: 10px;
+  padding: 10px;
+  padding-right: 40px;
+  border-radius: 50px;
+  color: #282828;
+  cursor: pointer;
+}
+
+.sidebar .recent-entry:hover {
+  background-color: #e2e6eb;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.sidebar .bottom {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar .bottom-item {
+  padding-right: 10px;
+  cursor: pointer;
+}
+
+@media (max-width: 900px) {
+  .sidebar {
+    width: 99px;
+    min-height: 102vh;
+   
+  }
+  .sidebar.extended {
+    width: 220px;
+  }
+}
+@media (max-width: 1258px) {
+  .sidebar{
+     height: 102vh;
+  }
+}
+@media (max-width: 600px) {
+  .sidebar {
+    display: none;
+    position: fixed; /* Changed to fixed for drawer functionality */
+    top: 0;
+    left: 0;
+    height: 100%;
+    z-index: 1000;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease-in-out;
+  }
+  .sidebar.drawer-open {
+    display: flex;
+    transform: translateX(0);
+  }
+  .sidebar.drawer-closed {
+    transform: translateX(-100%);
+  }
+}
+
+/* Scrollbar styling */
+.sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+  background: #f0f4f9;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background-color: #a1a1a1;
+  border-radius: 10px;
+  border: 3px solid #f0f4f9;
+}
+
+/* Scrollbar styling for recent-list */
+.recent::-webkit-scrollbar {
+  width: 6px;
+}
+
+.recent::-webkit-scrollbar-track {
+  background: #f0f4f9;
+}
+
+.recent::-webkit-scrollbar-thumb {
+  background-color: #a1a1a1;
+  border-radius: 10px;
+  border: 3px solid #f0f4f9;
+}
