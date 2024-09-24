@@ -11,14 +11,11 @@ const ContextProvider = (props) => {
     const [loading, setLoading] = useState(false);
     const [data, setData] = useState("");
 
-
-    const newChat = ()=>{
-             
+    const newChat = () => {
         setShowResult(false);
         setLoading(false);
-        
+    };
 
-    }
     const onSent = async (prompt) => {
         setInput("");
         setData("");
@@ -30,12 +27,18 @@ const ContextProvider = (props) => {
             setRecentPrompt(prompt);
         } else {
             setRecentPrompt(input);
-            setPrevPrompts(prev => [...prev, input]);
+            setPrevPrompts(prev => [...prev, { prompt: input, response: '' }]);
             response = await run(input);
         }
 
         if (response) {
-            setData(processResponse(response)); // Process response before setting data
+            setData(processResponse(response));
+            setPrevPrompts(prev => prev.map((item, index) => {
+                if (index === prev.length - 1) {
+                    return { ...item, response };
+                }
+                return item;
+            }));
         } else {
             setData("Error: Received no response.");
         }
@@ -43,18 +46,16 @@ const ContextProvider = (props) => {
         setInput("");
     };
 
-    // Function to process the response data
     const processResponse = (response) => {
-        // Replace "**" with bold tags
         let processedData = response.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-
-        // Replace "*" with line break tags
         processedData = processedData.replace(/\*(.*?)\*/g, '<br>$1<br>');
-
-        // Remove any remaining "*"
         processedData = processedData.replace(/\*/g, '');
-
         return processedData;
+    };
+
+    const referencePreviousData = (input) => {
+        let combinedHistory = prevPrompts.map(item => `${item.prompt}: ${item.response}`).join(' ');
+        return run(`${input}. Previous context: ${combinedHistory}`);
     };
 
     const contextValue = {
@@ -68,7 +69,8 @@ const ContextProvider = (props) => {
         data,
         input,
         setInput,
-        newChat
+        newChat,
+        referencePreviousData
     };
 
     return (

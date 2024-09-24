@@ -6,6 +6,7 @@ import './Main.css';
 
 const Main = () => {
     const {
+        newChat,
         onSent,
         recentPrompt,
         loading,
@@ -13,14 +14,15 @@ const Main = () => {
         data,
         input,
         setInput,
-        setRecentPrompt // Ensure this is imported from Context
+        prevPrompts,
+        setRecentPrompt,
+        referencePreviousData // Ensure this is imported from Context
     } = useContext(Context);
     
     const { user } = useUser();
     const [typedData, setTypedData] = useState("");
     const [isStopped, setIsStopped] = useState(false);
 
-    // Effect to handle typewriting effect
     useEffect(() => {
         if (!loading && showResult && !isStopped) {
             setTypedData("");
@@ -28,7 +30,6 @@ const Main = () => {
         }
     }, [data, loading, showResult, isStopped]);
 
-    // Function to animate typewriting effect
     const animateTyping = (text) => {
         let index = 0;
         const interval = setInterval(() => {
@@ -43,9 +44,9 @@ const Main = () => {
             });
             if (index >= text.length || isStopped) {
                 clearInterval(interval);
-                setIsStopped(false); // Reset the stop flag
+                setIsStopped(false);
             }
-        }, 5); // Adjust speed of typewriting effect here
+        }, 5);
     };
 
     const handleCardClick = async (text) => {
@@ -55,7 +56,7 @@ const Main = () => {
 
     const handleStopClick = () => {
         setIsStopped(true);
-        setTypedData(data); // Show the data immediately
+        setTypedData(data);
     };
 
     const handleInputKeyDown = (e) => {
@@ -64,10 +65,15 @@ const Main = () => {
         }
     };
 
+    const handleReferencePrompt = async () => {
+        const response = await referencePreviousData(input);
+        setTypedData(response);
+    };
+
     return (
         <div className="main">
             <div className="nav">
-                <p>Gemini</p>
+                <p onClick={()=>newChat()} style={{cursor:'pointer'}}>Gemini</p>
                 <UserButton />
             </div>
             <div className="main-container">
@@ -128,21 +134,22 @@ const Main = () => {
                             placeholder="Enter a prompt here..."
                         />
                         <div>
-                            {
-                                input ? <img onClick={() => onSent()} src={assets.send_icon} alt="" /> : <>
-                                {!loading && !data ? null : (
+                            {input ? (
+                                <img onClick={() => onSent()} src={assets.send_icon} alt="" />
+                            ) : (
+                                !loading && !data ? null : (
                                     isStopped || typedData === data ? (
                                         <img src={assets.send_icon} alt="" onClick={() => onSent()} />
                                     ) : (
                                         <img src={assets.circle_stop} alt="" onClick={handleStopClick} />
                                     )
-                                )}
-                                </>
-                            }
+                                )
+                            )}
                         </div>
                     </div>
                     <p className='bottom-info'>Gemini AI can make mistakes. Check important info.</p>
                 </div>
+               
             </div>
         </div>
     );
